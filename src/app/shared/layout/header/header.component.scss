@@ -30,6 +30,11 @@ header.header {
           li {
             margin-right: 40px;
             list-style: none;
+            border-bottom: 1px solid transparent;
+
+            &.active {
+              border-bottom-color: $base-text-color;
+            }
 
             a {
               cursor: pointer;
@@ -73,6 +78,63 @@ header.header {
             border-radius: 50%;
             background: #B6D5B9;
           }
+        }
+      }
+    }
+
+    .header-bottom {
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+      .header-bottom-menu {
+        margin-left: 26px;
+        margin-right: 97px;
+
+        nav ul {
+          margin: 0;
+          padding: 0;
+          display: flex;
+
+          li {
+            margin-right: 50px;
+            list-style: none;
+            border-bottom: 1px solid transparent;
+            &.active {
+              border-bottom-color: $base-text-color;
+            }
+
+            a {
+              color: $base-text-color;
+              font-size: 16px;
+              text-decoration: none;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      .header-bottom-search{
+        position: relative;
+
+        input {
+          border-radius: 30px;
+          border: 1px solid $base-text-color;
+          padding: 10px 10px 10px 43px;
+          color: $base-text-color;
+          font-size: 16px;
+          width: 214px;
+          height: 41px;
+          box-sizing: border-box;
+          outline: none;
+        }
+        &::after {
+          content: "";
+          background-image: url("../../../../assets/images/icons/search.png");
+          background-size: cover;
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          left: 15px;
+          top: 11px;
         }
       }
     }
