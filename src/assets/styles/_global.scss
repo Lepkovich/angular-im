@@ -9,3 +9,33 @@ html, body {
   max-width: $container-width;
   margin: 0 auto;
 }
+
+.input {
+  box-sizing: border-box;
+  padding: 17px 20px;
+  border-radius: 3px;
+  border: 2px solid #2A592E;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: $grey-text-color;
+}
+
+.button  {
+  border-radius: 5px;
+  background: #456F49;
+  text-align: center;
+  padding: 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: 0;
+  color: #FFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
+  &:disabled{
+    background: gray;
+    cursor: not-allowed;
+  }
+}
