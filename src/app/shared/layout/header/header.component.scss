@@ -13,7 +13,7 @@ header.header {
       align-items: center;
       border-bottom: 1px solid #C5C5C5;
 
-      color: $base-text-color;
+      color: $green-text-color;
       font-family: 'Montserrat', sans-serif;
       font-size: 16px;
       font-weight: 500;
@@ -33,7 +33,7 @@ header.header {
             border-bottom: 1px solid transparent;
 
             &.active {
-              border-bottom-color: $base-text-color;
+              border-bottom-color: $green-text-color;
             }
 
             a {
@@ -47,7 +47,7 @@ header.header {
       .header-top-phone {
         text-decoration: none;
         margin-right: 59px;
-        color: $base-text-color;
+        color: $green-text-color;
       }
 
       .header-top-actions {
@@ -71,7 +71,7 @@ header.header {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: $base-text-color;
+            color: $green-text-color;
             font-family: 'Montserrat', sans-serif;
             font-size: 9px;
             font-weight: 400;
@@ -100,11 +100,11 @@ header.header {
             list-style: none;
             border-bottom: 1px solid transparent;
             &.active {
-              border-bottom-color: $base-text-color;
+              border-bottom-color: $green-text-color;
             }
 
             a {
-              color: $base-text-color;
+              color: $green-text-color;
               font-size: 16px;
               text-decoration: none;
               cursor: pointer;
@@ -117,9 +117,9 @@ header.header {
 
         input {
           border-radius: 30px;
-          border: 1px solid $base-text-color;
+          border: 1px solid $green-text-color;
           padding: 10px 10px 10px 43px;
-          color: $base-text-color;
+          color: $green-text-color;
           font-size: 16px;
           width: 214px;
           height: 41px;
