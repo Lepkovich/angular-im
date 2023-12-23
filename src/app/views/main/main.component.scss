@@ -6,6 +6,7 @@
   background-position-x: calc(50% + 210px);
   padding-top: 58px;
   padding-bottom: 231px;
+
   .container {
     .main-title {
       color: #2A592E;
@@ -15,6 +16,7 @@
       line-height: 130%;
       margin-bottom: 67px;
     }
+
     .main-text {
       color: $green-text-color;
       font-size: 18px;
@@ -23,3 +25,81 @@
     }
   }
 }
+
+.offers {
+  background-color: #A4CBA3;
+  padding: 80px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    .offer {
+      width: 600px;
+      height: 250px;
+      padding: 35px 35px 0 35px;
+      border-radius: 5px;
+      background: #FFF;
+      box-sizing: border-box;
+
+      .offer-title {
+        color: $grey-text-color;
+        font-size: 20px;
+        line-height: 130%;
+      }
+
+      .offer-content {
+        display: flex;
+
+        .offer-text {
+          color: $grey-text-color;
+          font-size: 16px;
+          line-height: 130%;
+        }
+      }
+
+      &.offer-insta {
+        .offer-image {
+          margin-top: 35px;
+        }
+
+        .offer-text {
+          margin-top: 16px;
+          width: 234px;
+          max-width: 234px;
+          margin-left: 58px;
+        }
+
+        .offer-button {
+          margin-left: 168px;
+          margin-top: 22px;
+
+          .button {
+            width: 228px;
+          }
+        }
+      }
+
+      &.offer-collection {
+        .offer-title {
+          max-width: 362px;
+        }
+
+        .offer-image {
+          margin-top: 12px;
+          margin-left: 81px;
+        }
+
+        .offer-button {
+          margin-top: 75px;
+          margin-left: 44px;
+
+          .button {
+            width: 177px;
+          }
+        }
+      }
+    }
+  }
+}
+

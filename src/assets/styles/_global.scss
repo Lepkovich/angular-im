@@ -39,6 +39,12 @@ html, body {
     cursor: not-allowed;
   }
 }
+
+a.button {
+  text-decoration: none;
+  display: inline-block;
+
+}
 .mat-mdc-menu-item {
   span {
     font-family: 'Montserrat', sans-serif;
