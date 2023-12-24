@@ -1,0 +1,11 @@
+@import "global";
+
+@mixin head-lora-32 {
+  color: $green-text-color;
+
+  font-family: 'Lora', sans-serif;
+  font-style: normal;
+  font-size: 32px;
+  font-weight: 400;
+}
+
