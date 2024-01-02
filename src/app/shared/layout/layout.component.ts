@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from "../services/category.service";
 import {CategoryType} from "../../../types/category.type";
+import {CategoryWithTypeType} from "../../../types/category-with-type.type";
 
 @Component({
   selector: 'app-layout',
@@ -8,15 +9,18 @@ import {CategoryType} from "../../../types/category.type";
 })
 export class LayoutComponent implements OnInit{
 
-  categories: CategoryType[] = [];
+  categories: CategoryWithTypeType[] = [];
 
   constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit() {
-    this.categoryService.getCategories().
-    subscribe((categories: CategoryType[]) => {
-      this.categories = categories;
+    this.categoryService.getCategoriesWithTypes().
+    subscribe((categories: CategoryWithTypeType[]) => {
+      this.categories = categories.map(item => {
+        return Object.assign({typesUrl: item.types.map(item => item.url)}, item)
+      });
+      //переорганизовали массив с категориями добавив в него отдельно typesUrl из types.url
     })
   }
 }

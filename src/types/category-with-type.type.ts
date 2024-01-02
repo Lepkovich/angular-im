@@ -6,5 +6,6 @@
      id: string,
      name: string,
      url: string,
-   }[]
+   }[],
+   typesUrl?: string[]
 }
