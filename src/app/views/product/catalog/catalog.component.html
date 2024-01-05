@@ -49,7 +49,7 @@
 
       <div class="catalog-products">
         <div class="catalog-products-empty" *ngIf="this.noProductsFlag">Товары не найдены, попробуйте изменить параметры поиска</div>
-        <product-card *ngFor="let product of products" [product]="product"></product-card>
+        <product-card [countInCart]="product.countInCart" *ngFor="let product of products" [product]="product"></product-card>
       </div>
     </div>
 

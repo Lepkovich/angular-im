@@ -8,6 +8,8 @@ import {ActiveParamsUtil} from "../../../shared/utils/active-params.util";
 import {ActiveParamsType} from "../../../../types/active-params.type";
 import {AppliedFilterType} from "../../../../types/applied-filter.type";
 import {debounce, debounceTime} from "rxjs";
+import {CartService} from "../../../shared/services/cart.service";
+import {CartType} from "../../../../types/cart.type";
 
 @Component({
   selector: 'app-catalog',
@@ -29,14 +31,21 @@ export class CatalogComponent implements OnInit{
   ];
   pages: number[] = [];
   noProductsFlag: boolean = false;
+  cart: CartType | null = null;
 
   constructor(private productService: ProductService,
               private categoryService: CategoryService,
               private activatedRoute: ActivatedRoute,
-              private router: Router){
+              private router: Router,
+              private cartService: CartService){
   }
 
   ngOnInit() {
+
+    this.cartService.getCart()
+      .subscribe((data: CartType) => {
+        this.cart = data;
+      })
 
     this.categoryService.getCategoriesWithTypes()
       .subscribe(data => {
@@ -93,9 +102,23 @@ export class CatalogComponent implements OnInit{
                 for (let i = 1; i <= data.pages ; i++) {
                   this.pages.push(i)
                 }
-                this.products = data.items;
 
-                this.noProductsFlag = this.products.length === 0;
+                if (this.cart && this.cart.items.length > 0) {
+                  this.products = data.items.map(product => {
+                    if (this.cart) {
+                      const productInCart = this.cart.items.find(item => item.product.id === product.id);
+                      if (productInCart) {
+                        product.countInCart = productInCart.quantity
+                      }
+                    }
+                    return product;
+                  })
+
+                } else {
+                  this.products = data.items;
+                  this.noProductsFlag = this.products.length === 0;
+                }
+
               })
 
           })
