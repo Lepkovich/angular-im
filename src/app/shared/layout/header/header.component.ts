@@ -28,11 +28,16 @@ export class HeaderComponent implements OnInit{
   ngOnInit() {
     this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
       this.isLogged = isLoggedIn;
-    })
+    });
 
     this.cartService.getCartCount()
       .subscribe(data => {
         this.count = data.count;
+      });
+
+    this.cartService.count$
+      .subscribe(count => {
+        this.count = count;
       })
   }
 
