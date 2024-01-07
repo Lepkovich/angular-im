@@ -73,6 +73,3 @@ export class AuthInterceptor implements HttpInterceptor{
       )
   }
 }
-
-
-// 1.20m of lesson
