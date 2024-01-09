@@ -10,10 +10,15 @@ import {DefaultResponseType} from "../../../types/default-response.type";
 })
 export class CartService {
 
-  count: number = 0;
+  private count: number = 0;
   count$: Subject<number> = new Subject<number>();
 
   constructor(private http: HttpClient) { }
+
+  setCount(count: number) {
+    this.count = count;
+    this.count$.next(this.count); //оповестили всех слушателей, что count изменился
+  }
 
   getCart(): Observable<CartType | DefaultResponseType> {
     return this.http.get<CartType | DefaultResponseType>(environment.api + 'cart', {withCredentials: true});
@@ -25,11 +30,11 @@ export class CartService {
       .pipe(
         tap(data => {
           if (!data.hasOwnProperty('error')) {
-            this.count = 0;
+            let count = 0;
             (data as CartType).items.forEach(item => {
-              this.count += item.quantity;
-            }); //обновили кол-во товаров в корзине
-            this.count$.next(this.count); //передали его в subject
+              count += item.quantity;
+            });
+            this.setCount(count); //обновили кол-во товаров в корзине
           }
         })
       );
@@ -40,8 +45,7 @@ export class CartService {
       .pipe(
         tap(data => {
           if (!data.hasOwnProperty('error')) {
-            this.count = (data as {count: number}).count; //обновили кол-во товаров в корзине
-            this.count$.next(this.count); //передали его в subject
+            this.setCount((data as {count: number}).count); //обновили кол-во товаров в корзине
           }
         })
       );
