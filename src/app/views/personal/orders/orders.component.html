@@ -13,7 +13,7 @@
     <div class="orders-empty" *ngIf="!orders || orders.length === 0">
       <div>У вас еще нет заказов</div>
       <button class="button" routerLink="/catalog">В каталог</button>
-
+    </div>
     <div class="orders-list" *ngIf="orders && orders.length > 0">
 
       <div class="orders-list-item" *ngFor="let order of orders; let i = index">
@@ -33,8 +33,8 @@
 
         </div>
 
-        <div class="order-list-item-status">
-          {{order.status}}
+        <div class="order-list-item-status" style="border-color: {{order.color}}; color: {{order.color}}">
+          {{order.statusRus}}
         </div>
 
         <div class="order-list-item-price">

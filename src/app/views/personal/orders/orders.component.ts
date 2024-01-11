@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OrderService} from "../../../shared/services/order.service";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {OrderType} from "../../../../types/order.type";
+import {OrderStatusUtil} from "../../../shared/utils/order-status.util";
 
 @Component({
   selector: 'app-orders',
@@ -12,6 +13,7 @@ export class OrdersComponent implements OnInit{
 
   orders: OrderType[] = [];
 
+
   constructor(private orderService: OrderService) {
   }
   ngOnInit() {
@@ -20,7 +22,13 @@ export class OrdersComponent implements OnInit{
         if ((data as DefaultResponseType).error) {
           throw new Error((data as DefaultResponseType).message);
         }
-        this.orders = data as OrderType[];
+        //получим заказы и добавим к ним значения statusRus и color из утилиты OrderStatusUtil
+        this.orders = (data as OrderType[]).map(item => {
+          const status = OrderStatusUtil.getStatusAndColor(item.status);
+          item.statusRus = status.name;
+          item.color = status.color;
+          return item;
+        });
       })
   }
 }

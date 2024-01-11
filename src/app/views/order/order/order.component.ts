@@ -30,6 +30,7 @@ export class OrderComponent implements OnInit {
   totalAmount: number = 0;
   totalCount: number = 0;
 
+
   orderForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -56,6 +57,7 @@ export class OrderComponent implements OnInit {
               private fb: FormBuilder) {
     this.updateDeliveryTypeValidation(); //функция обновления валидаторов
   }
+
 
   ngOnInit() {
     this.cartService.getCart()

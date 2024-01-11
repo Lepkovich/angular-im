@@ -23,5 +23,7 @@ export type OrderType = {
     total: number
   }[],
   totalAmount?: number,
-  status?: OrderStatusType
+  status?: OrderStatusType, //статус заказа на странице order
+  statusRus?: string, //для утилиты OrderStatusUtil
+  color?: string //для утилиты OrderStatusUtil
 }
