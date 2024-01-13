@@ -97,7 +97,17 @@
           </nav>
         </div>
         <div class="header-bottom-search">
-          <input type="text" placeholder="Начните искать">
+          <input type="text" placeholder="Начните искать"
+                 (blur)="changeShowedSearch(false)" (focus)="changeShowedSearch(true)"
+                 [ngModel]="searchValue" (ngModelChange)="changedSearchValue($event)">
+
+<!--          25m of lesson-->
+          <div class="search-products" *ngIf="products && products.length > 0 && showedSearch">
+            <div class="search-product" *ngFor="let product of products" (click)="selectProduct(product.url)">
+              <div class="search-product-image" style="background-image: url({{serverStaticPath + product.image}})"></div>
+              <div class="search-product-name">{{product.name}}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
