@@ -66,9 +66,23 @@
           font-weight: 600;
         }
 
-        .favorite-product-action button{
-          width: 160px;
+
+
+        .favorite-product-action {
+          position: relative;
+
+          button{
+            width: 160px;
+          }
+          .favorite-product-count {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 5px;
+            margin-bottom: 5px;
+          }
         }
+
 
         .favorite-product-remove {
           margin-left: 60px;

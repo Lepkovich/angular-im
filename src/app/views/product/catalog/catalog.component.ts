@@ -11,7 +11,6 @@ import {debounce, debounceTime} from "rxjs";
 import {CartService} from "../../../shared/services/cart.service";
 import {CartType} from "../../../../types/cart.type";
 import {FavoriteService} from "../../../shared/services/favorite.service";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 import {FavoriteType} from "../../../../types/favorite.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {AuthService} from "../../../core/auth/auth.service";
@@ -56,6 +55,7 @@ export class CatalogComponent implements OnInit{
           throw new Error((data as DefaultResponseType).message);
         }
         this.cart = data as CartType;
+        console.log(this.cart);
 
         if (this.authService.isLoggedIn()) {
           this.favoriteService.getFavorites()
@@ -69,6 +69,7 @@ export class CatalogComponent implements OnInit{
                   }
 
                   this.favoriteProducts = data as FavoriteType[];
+                  console.log(this.favoriteProducts);
                   this.processCatalog();
 
                 },
