@@ -15,10 +15,10 @@
                 <a routerLink="/catalog">Каталог</a>
               </li>
               <li>
-                <a>Отзывы</a>
+                <a routerLink="/" fragment="reviews">Отзывы</a>
               </li>
               <li>
-                <a>Доставка и оплата</a>
+                <a routerLink="/" fragment="delivery">Доставка и оплата</a>
               </li>
             </ul>
           </nav>
@@ -99,9 +99,8 @@
         <div class="header-bottom-search">
           <input type="text" placeholder="Начните искать"
                  (blur)="changeShowedSearch(false)" (focus)="changeShowedSearch(true)"
-                 [ngModel]="searchValue" (ngModelChange)="changedSearchValue($event)">
+                 [formControl]="searchField" >
 
-<!--          25m of lesson-->
           <div class="search-products" *ngIf="products && products.length > 0 && showedSearch">
             <div class="search-product" *ngFor="let product of products" (click)="selectProduct(product.url)">
               <div class="search-product-image" style="background-image: url({{serverStaticPath + product.image}})"></div>
