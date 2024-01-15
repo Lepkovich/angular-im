@@ -81,18 +81,21 @@ export class FavoriteComponent implements OnInit{
             throw new Error((data as DefaultResponseType).message);
           }
           this.cart = data as CartType;
-          this.count = count;
+          this.updateFavoriteProducts(id, count);
         })
     }
   }
 
   addToCart(id: string) {
-    this.cartService.updateCart(id, this.count)
+    this.cartService.updateCart(id, 1)
       .subscribe((data: CartType | DefaultResponseType) => {
         if ((data as DefaultResponseType).error) {
           throw new Error((data as DefaultResponseType).message);
         }
-        // this.countInCart = this.count;
+
+        this.cart = data as CartType;
+        this.updateFavoriteProducts(id, 1);
+
       })
   }
 
@@ -105,5 +108,14 @@ export class FavoriteComponent implements OnInit{
         // this.countInCart = 0;
         // this.count = 1;
       })
+  }
+
+  updateFavoriteProducts (id: string, count: number) {
+    this.favoriteProducts = this.favoriteProducts.map(product => {
+      if (product.id === id) {
+        return { ...product, countInCart: count };
+      }
+      return product;
+    });
   }
 }
