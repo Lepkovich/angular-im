@@ -64,8 +64,6 @@ export class DetailComponent implements OnInit {
       this.productService.getProduct(params['url'])
         .subscribe((data: ProductType) => {
           this.product = data;
-          console.log(this.product);
-
 
           this.cartService.getCart()
             .subscribe((cartData: CartType | DefaultResponseType) => {

@@ -20,7 +20,9 @@ export class ProductCardComponent implements OnInit{
   @Input() product!: ProductType;
   serverStaticPath = environment.serverStaticPath;
   count: number = 1;
+
   @Input() isLight: boolean = false;
+  @Input() isLogged: boolean = false;
   @Input() countInCart: number | undefined = 0;
 
 
@@ -35,7 +37,17 @@ export class ProductCardComponent implements OnInit{
     if (this.countInCart && this.countInCart > 1) {
       this.count = this.countInCart;
     }
+
+    if (this.authService.isLoggedIn()) {
+      this.isLogged = true;
+    }
+
+    this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
+      this.isLogged = isLoggedIn;
+    });
   }
+
+
 
   updateCount(value: number) {
     this.count = value;

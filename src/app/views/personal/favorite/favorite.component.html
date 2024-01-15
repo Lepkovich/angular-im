@@ -15,10 +15,8 @@
         <div class="favorite-product-name">{{favoriteProduct.name}}</div>
         <div class="favorite-product-price">{{favoriteProduct.price}}</div>
 
-<!--        <count-selector [count]="cartProduct.quantity" (onCountChange)="updateCount(cartProduct.product.id, $event)"></count-selector>-->
-
         <div class="favorite-product-action">
-          <button class="button" *ngIf="!favoriteProduct.countInCart" (click)="addToCart(favoriteProduct.id)">В корзину</button>
+          <button class="button" *ngIf="!favoriteProduct.countInCart || favoriteProduct.countInCart === 0" (click)="addToCart(favoriteProduct.id)">В корзину</button>
           <button class="button button-transparent button-in-cart" *ngIf="favoriteProduct.countInCart && favoriteProduct.countInCart > 0" (click)="removeFromCart(favoriteProduct.id)">
             <span>В корзине</span>
             <span>Удалить</span>

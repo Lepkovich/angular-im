@@ -14,11 +14,9 @@ import {CartService} from "../../../shared/services/cart.service";
 export class FavoriteComponent implements OnInit{
 
   favoriteProducts: FavoriteType[] = [];
-  product!: FavoriteType;
-  count: number = 1;
   cart: CartType | null = null;
+
   serverStaticPath = environment.serverStaticPath;
-  isProductInCart: boolean = false;
 
   constructor(private favoriteService: FavoriteService,
               private cartService: CartService,
@@ -34,7 +32,6 @@ export class FavoriteComponent implements OnInit{
         }
 
         this.favoriteProducts = data as FavoriteType[];
-        console.log(this.favoriteProducts);
 
         this.cartService.getCart()
           .subscribe((cartData: CartType | DefaultResponseType) => {
@@ -42,7 +39,6 @@ export class FavoriteComponent implements OnInit{
               throw new Error((cartData as DefaultResponseType).message);
             }
             const cartDataResponse = cartData as CartType;
-            console.log(cartDataResponse);
 
             if (cartDataResponse && cartDataResponse.items.length > 0) {
               this.favoriteProducts = this.favoriteProducts.map(product => {
@@ -74,7 +70,6 @@ export class FavoriteComponent implements OnInit{
   }
 
   updateCount(id: string, count: number) {
-    if (this.cart) {
       this.cartService.updateCart(id, count)
         .subscribe((data: CartType | DefaultResponseType) => {
           if ((data as DefaultResponseType).error) {
@@ -83,7 +78,6 @@ export class FavoriteComponent implements OnInit{
           this.cart = data as CartType;
           this.updateFavoriteProducts(id, count);
         })
-    }
   }
 
   addToCart(id: string) {
@@ -105,8 +99,7 @@ export class FavoriteComponent implements OnInit{
         if ((data as DefaultResponseType).error) {
           throw new Error((data as DefaultResponseType).message);
         }
-        // this.countInCart = 0;
-        // this.count = 1;
+        this.updateFavoriteProducts(id, 0)
       })
   }
 

@@ -55,7 +55,6 @@ export class CatalogComponent implements OnInit{
           throw new Error((data as DefaultResponseType).message);
         }
         this.cart = data as CartType;
-        console.log(this.cart);
 
         if (this.authService.isLoggedIn()) {
           this.favoriteService.getFavorites()
@@ -69,7 +68,6 @@ export class CatalogComponent implements OnInit{
                   }
 
                   this.favoriteProducts = data as FavoriteType[];
-                  console.log(this.favoriteProducts);
                   this.processCatalog();
 
                 },
