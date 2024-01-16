@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit{
             this._snackBar.open('Вы успешно авторизовались')
             this.router.navigate(['/']);
 
-
       },
           error: (errorResponse: HttpErrorResponse) => {
             if (errorResponse.error && errorResponse.error.message) {
