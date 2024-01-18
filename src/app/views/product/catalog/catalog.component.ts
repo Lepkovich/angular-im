@@ -215,7 +215,6 @@ export class CatalogComponent implements OnInit{
     if (!this.activeParams.page) {
       this.activeParams.page = 1;
     }
-    console.log('текущая страница до NextPage: ' + this.activeParams.page);
     if (this.activeParams.page && this.activeParams.page < this.pages.length) {
       this.activeParams.page++;
       console.log('увеличили NextPage: ' + this.activeParams.page)
