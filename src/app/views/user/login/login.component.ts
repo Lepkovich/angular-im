@@ -6,6 +6,8 @@ import {DefaultResponseType} from "../../../../types/default-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {CartService} from "../../../shared/services/cart.service";
+import {count} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit{
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private _snackBar: MatSnackBar,
+              private cartService: CartService,
               private router: Router) {
   }
   ngOnInit() {
@@ -50,7 +53,16 @@ export class LoginComponent implements OnInit{
 
             this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
             this.authService.userId = loginResponse.userId;
-            this._snackBar.open('Вы успешно авторизовались')
+            this._snackBar.open('Вы успешно авторизовались');
+            this.cartService.getCartCount()
+              .subscribe((data: { count: number } | DefaultResponseType) => {
+                if ((data as DefaultResponseType).error) {
+                  throw new Error((data as DefaultResponseType).message);
+                }
+                const count = (data as { count: number }).count;
+                this.cartService.setCount(count); //обновили кол-во товаров в корзине хедера
+
+              });
             this.router.navigate(['/']);
 
       },
