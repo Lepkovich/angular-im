@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ActiveParamsUtil} from "../../../shared/utils/active-params.util";
 import {ActiveParamsType} from "../../../../types/active-params.type";
 import {AppliedFilterType} from "../../../../types/applied-filter.type";
-import {debounce, debounceTime} from "rxjs";
+import {debounceTime} from "rxjs";
 import {CartService} from "../../../shared/services/cart.service";
 import {CartType} from "../../../../types/cart.type";
 import {FavoriteService} from "../../../shared/services/favorite.service";
@@ -82,6 +82,7 @@ export class CatalogComponent implements OnInit{
   }
 
   processCatalog() {
+
     this.categoryService.getCategoriesWithTypes()
       .subscribe(data => {
         this.categoriesWithTypes = data;
@@ -178,7 +179,6 @@ export class CatalogComponent implements OnInit{
       this.activeParams.types = this.activeParams.types.filter(item => item !== appliedFilter.urlParam)
     }
 
-    this.activeParams.page = 1;
     this.router.navigate(['/catalog'], {
       queryParams: this.activeParams
     });
@@ -212,8 +212,13 @@ export class CatalogComponent implements OnInit{
   }
 
   openNextPage() {
+    if (!this.activeParams.page) {
+      this.activeParams.page = 1;
+    }
+    console.log('текущая страница до NextPage: ' + this.activeParams.page);
     if (this.activeParams.page && this.activeParams.page < this.pages.length) {
       this.activeParams.page++;
+      console.log('увеличили NextPage: ' + this.activeParams.page)
       this.router.navigate(['/catalog'], {
         queryParams: this.activeParams
       });
