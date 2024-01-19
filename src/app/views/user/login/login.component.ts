@@ -7,7 +7,6 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {CartService} from "../../../shared/services/cart.service";
-import {count} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -61,7 +60,6 @@ export class LoginComponent implements OnInit{
                 }
                 const count = (data as { count: number }).count;
                 this.cartService.setCount(count); //обновили кол-во товаров в корзине хедера
-
               });
             this.router.navigate(['/']);
 

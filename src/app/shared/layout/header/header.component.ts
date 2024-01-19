@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
               private productService: ProductService,
               private cartService: CartService) {
     this.isLogged = authService.isLoggedIn()
-    this.count = cartService.getCount(); //обратился к геттеру для получения актуального кол-ва в корзине
   }
 
   ngOnInit() {
@@ -91,7 +90,14 @@ export class HeaderComponent implements OnInit {
   doLogout(): void {
     this.authService.removeTokens();
     this.authService.userId = null;
-    this.cartService.setCount(0);
+    this.cartService.getCartCount()
+      .subscribe((data: { count: number } | DefaultResponseType) => {
+        if ((data as DefaultResponseType).error) {
+          throw new Error((data as DefaultResponseType).message);
+        }
+        const count = (data as { count: number }).count;
+        this.cartService.setCount(count); //обновили кол-во товаров в корзине хедера при выходе
+      });
     this._snackBar.open('Вы вышли из системы')
     this.router.navigate(['/']);
   }

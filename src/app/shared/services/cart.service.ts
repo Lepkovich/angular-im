@@ -20,10 +20,6 @@ export class CartService {
     this.count$.next(this.count); //оповестили всех слушателей, что count изменился
   }
 
-  //добавил геттер для получения кол-ва товаров в корзине хедера
-  public getCount() {
-    return this.count;
-  }
 
   getCart(): Observable<CartType | DefaultResponseType> {
     return this.http.get<CartType | DefaultResponseType>(environment.api + 'cart', {withCredentials: true});
